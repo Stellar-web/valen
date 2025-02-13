@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สุขสันต์วันวาเลนไทน์</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #ffe6f2;
+            text-align: center;
+        }
+        h1 {
+            font-size: 3em;
+            opacity: 1;
+            transition: opacity 1s;
+            color: #ff66b2;
+        }
+        .hidden {
+            opacity: 0;
+        }
+        input {
+            margin-top: 10px;
+            font-size: 1.5em;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #ff66b2;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            border-color: #ff3366;
+        }
+        button {
+            margin-top: 10px;
+            font-size: 1.5em;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #ff66b2;
+            color: white;
+            border: none;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            background-color: #ff3366;
+        }
+        button:active {
+            transform: scale(0.9);
+        }
+        .hint {
+            font-size: 1.2em;
+            color: #ff99cc;
+            margin-top: 5px;
+        }
+        img {
+            width: 300px;
+            height: auto;
+            margin-top: 20px;
+            animation: bounce 1s infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        video {
+            width: 80%;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1 id="text">สุขสันต์วันวาเลนไทน์นะคะ 💖</h1>
+    
+    <div id="question1" style="display: none;">
+        <p style="font-size: 1.5em;">ไหนลองถามหน่อยวันครบรอบเราวันที่เท่าไหร่? 💑</p>
+        <input type="text" id="dateAnswer" placeholder="ตัวอย่างตอบ 13/02/24">
+        <button onclick="checkDate()">ส่งคำตอบ</button>
+        <p class="hint">ลองตอบดูนะคะ 💕</p>
+    </div>
+    
+    <div id="question2" style="display: none;">
+        <p style="font-size: 1.5em;">ตัวนี้ชื่ออะไร? 🥰</p>
+        <img src="cat.jpg" alt="รูปภาพ" />
+        <input type="text" id="nameAnswer" placeholder="พิมพ์คำตอบที่นี่">
+        <button onclick="checkName()">ส่งคำตอบ</button>
+        <p class="hint">ลองตอบดูนะคะ 💕</p>
+    </div>
+    
+    <div id="videoScene" style="display: none;">
+        <video src="eat.MOV" autoplay muted></video>
+        <p style="font-size: 1.5em;">ตั้งแต่คบกันมา เทอกินเก่งเหมือนเดิม อ้วนสุดๆ 😘</p>
+        <button onclick="nextScene()">กดเพื่อไปต่อ</button>
+    </div>
+    
+    <div id="firstMeetScene" style="display: none;">
+        <img src="IMG_5529.jpg" alt="รูปวันแรกที่เจอกัน" />
+        <p style="font-size: 1.5em;">วันแรกที่เราเจอกัน วันนั้นเขารู้สึกชอบเทอมากนะ 💖 เทอน่ารักมาก แล้วตอนนี้ก็ยังน่ารักเหมือนเดิม</p>
+        <p style="font-size: 1.5em;">เขารู้สึกว่าชอบเธอก็ตอนที่เห็นเธอไปคุยกับผู้ชายคนอื่น แล้วรู้สึกหวงขึ้นมานี่แหละ</p>
+        <button onclick="showMoreImages()">ไปต่อ 💕</button>
+    </div>
+
+    <div id="moreImages" style="display: none;">
+        <img src="IMG_5838.jpg" alt="ส่งรูปมาบ่อยๆ" />
+        <img src="IMG_25680213210231122.JPG" alt="บางทีเข้าใจยาก" />
+        <img src="IMG_25680213210231120.JPG" alt="บางทีก็ปั่นมาก" />
+        <img src="IMG_5833.jpg" alt="บางทีก็หงอยเป็นหมา" />
+        <p style="font-size: 1.5em;">มีรูปเยอะๆ บางทีเทอก็ดูเข้าใจยากบางทีก็ปั่นมาก บางทีก็หงอยเป็นหมาเลยนะคะ 💖</p>
+        <button onclick="goToCamp()">ไปค่ายรับน้อง</button>
+    </div>
+
+    <div id="campScene" style="display: none;">
+        <img src="IMG_7477.JPG" alt="ไปค่ายรับน้อง" />
+        <p style="font-size: 1.5em;">พอไปค่ายรับน้องก็สนุกมาก ได้เดินกับเทอฟิรๆ </p>
+        <button onclick="expressFeelings()">ไปต่อ</button>
+    </div>
+
+    <div id="expressFeelings" style="display: none;">
+        <p style="font-size: 1.5em;">เค้ารักเธอมากๆนะ จะรักไปนานๆ อยู่ข้ามปีกันไปอีกปีนะ 💖</p>
+        <button onclick="askLove()">รักเค้ามั้ย?</button>
+    </div>
+
+    <div id="askLove" style="display: none;">
+        <p style="font-size: 2em;" id="loveQuestion">รักเค้ามั้ย?</p>
+        <button onclick="noLove()">ไม่รัก</button>
+        <button onclick="yesLove()">รัก</button>
+    </div>
+    
+    <p id="result" style="font-size: 1.5em; color: #ff66b2;"></p>
+    
+    <script>
+        setTimeout(() => {
+            document.getElementById("text").classList.add("hidden");
+            setTimeout(() => {
+                document.getElementById("text").style.display = "none";
+                document.getElementById("question1").style.display = "block";
+            }, 2000);
+        }, 3000);
+
+        function checkDate() {
+            const correctDate = "29/05/24";
+            const userDate = document.getElementById("dateAnswer").value;
+            if (userDate === correctDate) {
+                document.getElementById("question1").style.display = "none";
+                document.getElementById("question2").style.display = "block";
+            } else {
+                document.getElementById("result").innerHTML = "ลองอีกทีนะคะ 💖";
+            }
+        }
+
+        function checkName() {
+            const correctName = "โน";
+            const userName = document.getElementById("nameAnswer").value;
+            if (userName === correctName) {
+                document.getElementById("question2").style.display = "none";
+                document.getElementById("videoScene").style.display = "block";
+            } else {
+                document.getElementById("result").innerHTML = "ลองอีกทีนะคะ 💖";
+            }
+        }
+
+        function nextScene() {
+            document.getElementById("videoScene").style.display = "none";
+            document.getElementById("firstMeetScene").style.display = "block";
+        }
+
+        function showMoreImages() {
+            document.getElementById("firstMeetScene").style.display = "none";
+            document.getElementById("moreImages").style.display = "block";
+        }
+
+        function goToCamp() {
+            document.getElementById("moreImages").style.display = "none";
+            document.getElementById("campScene").style.display = "block";
+        }
+
+        function expressFeelings() {
+            document.getElementById("campScene").style.display = "none";
+            document.getElementById("expressFeelings").style.display = "block";
+        }
+
+        function askLove() {
+            document.getElementById("expressFeelings").style.display = "none";
+            document.getElementById("askLove").style.display = "block";
+        }
+
+        function noLove() {
+            document.getElementById("loveQuestion").style.fontSize = "1.5em";
+            document.getElementById("loveQuestion").innerHTML = "รักเค้ามั้ย? นี่นะ? 💖";
+        }
+
+        function yesLove() {
+            document.getElementById("loveQuestion").style.fontSize = "2.5em";
+            document.getElementById("loveQuestion").innerHTML = "รักเค้ามั้ย? รักค่ะ 💖";
+        }
+
+        function finishStory() {
+            document.getElementById("result").innerHTML = "ไม่ว่าจะตอบว่าอะไร เค้าก็ดีใจที่มีเทออยู่ตรงนี้นะ 💖";
+        }
+    </script>
+</body>
+</html>
